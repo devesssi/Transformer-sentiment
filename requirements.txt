@@ -1,0 +1,13 @@
+# Essential
+torch
+datasets
+tqdm
+matplotlib
+scikit-learn
+jupyter
+
+# Optional (safe to install)
+pandas
+seaborn
+black
+flake8
