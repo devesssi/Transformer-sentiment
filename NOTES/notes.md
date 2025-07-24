@@ -31,7 +31,22 @@ For each token, it learns a vector that contains information about that token an
 
 Decoder:
 Takes the encoder’s output and generates an output sequence, one token at a time.
-Used in tasks where the output is a sequence, and it needs to depend on what has already been generated (e.g., translation, summarization).
+Used in tasks where the output is a sequence, and it needs to depend on what has already been generated (e.g., translation, summarization).\
+
+Input x
+   ↓
+Multi-Head Attention → Attention(x)
+   ↓
+Residual: x + Attention(x)
+   ↓
+LayerNorm
+   ↓
+Feed Forward → FFN(x)
+   ↓
+Residual: x + FFN(x)
+   ↓
+LayerNorm
+
 
 
 
