@@ -3,7 +3,7 @@ import torch.nn as nn
 import math
 
 
-class positionalembed(nn.Module):
+class positionalEncoding(nn.Module):
     def __init__(self,d_model, max_length= 5000):
         super().__init__()
         self.d_model = d_model
@@ -24,7 +24,7 @@ class Embeddings(nn.Module):
     def __init__(self, vocabsize, d_model, max_length =5000):
         super().__init__()
         self.embedding = nn.embedding(vocabsize, d_model)
-        self.positionalencod = positionalembed(d_model , max_length)
+        self.positionalencod = positionalEncoding(d_model , max_length)
         
     def forward(self, x):
         x = x.embedding(x)

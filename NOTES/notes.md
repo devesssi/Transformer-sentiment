@@ -611,3 +611,24 @@ Now you know how to update `w` to make the prediction better.
 🔁 This process repeats for many batches of data, gradually improving the model.
 
 Let me know if you'd like a visual example or math breakdown!
+
+
+
+Why does self-attention use Q=K=V, but cross-attention (in decoder) uses different Q and K/V?
+The difference in how self-attention and cross-attention use queries (Q), keys (K), and values (V) stems from their distinct purposes in a Transformer model.
+
+Self-Attention (e.g., in Encoder or Decoder Layers)
+In self-attention, the input sequence attends to itself to capture dependencies between its own elements. For example, in a sentence, each word should consider its relationship with every other word.
+
+Q = K = V = Input embeddings (from the same layer).
+Purpose: To compute rich contextual representations by allowing each position to aggregate information from all other positions in the same sequence.
+Why Q = K = V?
+Since the goal is to understand internal relationships within a single sequence, the same input is used to generate queries (what to focus on), keys (what to attend to), and values (what information to retrieve). This symmetry allows the model to learn how different parts of the input relate to each other.
+Cross-Attention (in Decoder of Transformer)
+In the decoder, cross-attention enables the generated output (so far) to attend to the encoder's output — that is, the encoded representation of the input sequence.
+
+Q = Decoder hidden states (current output context).
+K = V = Encoder hidden states (input representation).
+Purpose: To let the decoder selectively focus on relevant parts of the input when generating each output token (e.g., in machine translation, deciding which input words are relevant for the next translated word).
+Why different Q and K/V?
+Here, the query comes from the decoder (determining what part of the output is being generated), while the keys and values come from the encoder (representing the input). This asymmetry reflects the flow of information: the decoder uses its current state to "ask" (via Q) what parts of the input (via K) are relevant, then retrieves the corresponding information (via V).
